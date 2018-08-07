@@ -1,27 +1,34 @@
-#TODO
-General:
-- [ ] add author info for GNU readline and libnoise in README
+# TODO
+In order of importance  
+
+## General:
+- [X] add info for GNU readline and author info on linenoise in README
 - [ ] be usable as a default shell
 - [ ] document and fix known bugs
-- [ ] add to github account
-- [ ] pretty up the README (ex links and pictures)
+- [X] add to github account
+- [X] pretty up the README (ex links and pictures)
 - [ ] finish all 'TODO' tags in source code
-- [ ] prioritize TODO list
+- [X] prioritize TODO list
 - [X] come up with a list of commands
 - [ ] figure out cross platform stuff (make for linux first)
-- [ ] copy over old read me
+- [X] copy over old read me
 - [X] mark all other quick term projects as deprecated
-- [ ] move TODO to its own file
-- [ ] Add a license (MIT or GPLv2)
-- [X] Add color to prompt (cyan)
-- [ ] Audit code for buffer overflows
-- [X] Create a make file
-- [X] Understand gcc -O option (optimization)
+- [X] move TODO to its own file
+- [X] add a license (MIT or GPLv2)
+- [X] add color to prompt
+- [ ] audit code for buffer overflows
+- [ ] clean up code
+- [ ] add more comments
+- [X] create a make file
+- [X] understand gcc -O option ([optimization](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html))
+- [ ] test other libc implementations (musl, uClibc, etc)
 - [ ] test in cygin
 - [ ] write a manpage
-- [ ] fix bug in linenoise lib (https://github.com/antirez/linenoise/issues/158)
+- [ ] fix [this bug](https://github.com/antirez/linenoise/issues/158) in linenoise lib
 
-Features:
+## Features:
+- [X] basic features (ex run a command, change directories)
+- [X] add a line editing feature
 - [ ] add command line args
 - [ ] handle internal and env variables
 - [ ] handle linux pipes
