@@ -16,6 +16,7 @@ In order of importance
 - [X] move TODO to its own file
 - [X] add a license (MIT or GPLv2)
 - [X] add color to prompt
+- [ ] audit code for memory leaks
 - [ ] audit code for buffer overflows
 - [ ] clean up code
 - [ ] add more comments
