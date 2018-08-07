@@ -30,6 +30,9 @@ The simplest way is to compile by `make`
 * NO_COLOR (`-DNO_COLOR`)	: disables color in the prompt **ONLY**
 
 ## How to contribute
+Take a look at the TODO list for what still needs to get done.
+
+Then:
 1. Fork the repository
 2. Compile
 3. Test
