@@ -11,8 +11,9 @@ the [suckless philosophy](https://suckless.org/philosophy/). (note this project 
 associated with suckless).
 
 ## License
-This code (see exception bellow) is licensed under the MIT license. See 'LICENSE' for details. 
-Note, the source code for [linenoise](https://github.com/antirez/linenoise) is also including in this repo which is under the BSD 2-Clause "Simplified" License. See libs/LICENSE for more details.
+This code (see exception) is licensed under the MIT license. See 'LICENSE' for details. 
+
+Note, the source code for [linenoise](https://github.com/antirez/linenoise) is also included in this repo which is under the BSD 2-Clause "Simplified" License. See [src/libs/LICENSE](https://raw.githubusercontent.com/mckenney5/qsh/master/src/libs/LICENSE) for more details.
 
 ## Compiling and Testing
 This program allows a couple of compiling options.
