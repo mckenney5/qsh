@@ -1,7 +1,6 @@
 /* Quick Shell's main file */
 
 #include "ui.h"
-
 int main(void){
 	char inpt[MAX_USER_INPUT]; //user input
 	char prompt[MAX_USER_INPUT]; //prompt to display
@@ -43,6 +42,7 @@ int main(void){
 			snprintf(prompt, MAX_USER_INPUT, 
 			"%s%s%s@%s%s:%s%s%s$ ", WHITE, user, RED, WHITE, 
 			hostname, BLUE, cdir, RESET);
+
 		#ifdef TINY
 			//get and clean the input
 			printf(prompt);
@@ -63,7 +63,7 @@ int main(void){
 		if(!strcmp("rebuild", inpt) || !strcmp("r", inpt)){
 			if(DEBUG){
 				//allows the dev to easily recompile the program
-				system("clear && ./compile.sh && ./qt && rm qt");
+				system("clear && make DEBUG && ./qsh.debugging && rm qsh.debugging");
 				memset(inpt, '\0', MAX_USER_INPUT);
 			}
 		}
@@ -250,18 +250,15 @@ int handle_var(char **inpt){
 	}
 }
 
-void run(const char *location, const char * program, char* args){
-	//Takes the location and argv (program name then args)
-	//pid_t parent = getpid();
-	pid_t pid = fork();
+void run(const char *location, const char *program, char* args){
+	//converts user input into something exec can understand
 	char *args2[MAX_ARGS+1];
 	unsigned int i;
 	unsigned argc = 0;
 	args2[0] = calloc(sizeof(char), MAX_USER_INPUT);
-
 	if(args == NULL)
 		//if no args were supplied
-		args2[0][0] = '\0';
+		args2[1] = NULL;
 	else {
 		char *token;
 		//printf("args: '%s'\n", args);
@@ -275,27 +272,39 @@ void run(const char *location, const char * program, char* args){
 			strncpy(args2[i], token, MAX_USER_INPUT);
 			args2[i+1] = NULL;	
 			token = strtok(NULL, " ");
-			argc++;
-		}
+			argc++;	
+		}	
+	}
+	fflush(stdout); //clears any garbage from the UI
+	call(location, program, args2, argc); //TODO pass by ref?
+	for(i=0; i <= argc; i++){ //frees and whipes all alocated memory
+		memset(args2[i], '\0', sizeof(char)*MAX_USER_INPUT);
+		free(args2[i]);
 	}
 
+}
+
+int call(const char *location, const char *program, char *argv[], int argc){	
+	//Does the forking and calling work
+	//pid_t parent = getpid();
+	pid_t pid = fork();
+	int status = 0;
 	if (pid == -1){
 		perror("Failed to fork program");
 	} else if (pid > 0){
 		//TODO check return status?
-		int status;
 		waitpid(pid, &status, 0);
 	} else {
-		if(args2[0][0] != '\0'){
+		if(argc >= 1 && argv[1] != NULL){
 			//if there were args, call execv with '*argv[]'
-			execv(location, args2);
-		} else
+			execv(location, argv);
+		} else {
 			//if no args were supplied then
 			//supply the program name as 'argv[0]'
-			//remember that 'argv[0]' is always the program name
+			//remember that 'argv[0]' is always the program name	
 			execl(location, program, (char*) NULL);
+		}
 		_exit(EXIT_FAILURE);   // exec never returns
 	};
-	for(i=0; i < argc; i++) //frees all alocated memory
-		free(args2[i]);
+	return status;
 }

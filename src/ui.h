@@ -71,6 +71,7 @@ int find(const char[], const int, char*[]); //checks if a file exists, puts its 
 int handle_var(char**);
 int get_var(const char[]);
 void run(const char*, const char*, char*);
+int call(const char *location, const char *program, char *argv[], int argc);
 
 #ifndef GNU
 	#ifndef TINY
