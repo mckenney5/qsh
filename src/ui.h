@@ -1,0 +1,110 @@
+/* Quick Shell's main header file */
+/*
+ * Compiler Options:
+ * -DGNU 	: The user interface uses GNU Readline
+ * -DTINY 	: The user interface just uses fgets() (aka doesnt handle line editing)
+ * <none>	: The user interface uses linenoise library 
+ *		  (see https://github.com/antirez/linenoise)
+ * -DNO_COLOR	: Disables color for the prompt (note does not affect readline nor linenoise)
+ */
+
+/* Standard C Libs */
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+/* Standard Linux Libs */
+#include <unistd.h> //checks if files exist
+#include <pwd.h> //gets username
+#include <sys/types.h> //run()
+#include <sys/wait.h> //run()
+
+/* Non-standard libs */
+#ifdef GNU
+	#include <readline/readline.h>
+	#include <readline/history.h>
+#else
+	#ifndef TINY
+		//if neither GNU nor TINY is defined, use this as the default
+		#include "libs/linenoise.h"
+		#define HIST_FILE "history.log"
+	#endif
+#endif
+
+/* Commands */
+#include "commands/c.h"
+#include "commands/help.h"
+
+#define MAX_USER_INPUT 1024 //how much data can be typed in the terminal
+#define BAD_COMMAND "Command not found." //What is returned when the command isnt found
+#define MAX_ARGS 4096 //POSIX smallest ammount of command line args
+
+/* Foreground Colors */
+#ifndef NO_COLOR
+	#define RED "\x1B[31m"
+	#define GREEN "\x1B[32m"
+	#define YELLOW "\x1B[33m"
+	#define BLUE "\x1B[34m"
+	#define MAGENTA "\x1B[35m"
+	#define CYAN "\x1B[36m"
+	#define WHITE "\x1B[37m"
+	#define RESET "\x1B[0m"
+#else
+	#define RED ""
+	#define GREEN ""
+	#define YELLOW ""
+	#define BLUE ""
+	#define MAGENTA ""
+	#define CYAN ""
+	#define WHITE ""
+	#define RESET ""
+#endif
+
+/* Defaults */
+#define DEFAULT_PROMPT "=> " //used only if a prompt isnt set
+#define DEFAULT_EXEC_PATH1 "/bin/"
+#define DEFAULT_EXEC_PATH2 "/usr/bin/"
+#define DEFAULT_EXEC_PATH3 "/sbin/"
+
+void interp(char[]); //checks if commands are valid, then runs them
+int find(const char[], const int, char*[]); //checks if a file exists, puts its location in *location
+int handle_var(char**);
+int get_var(const char[]);
+void run(const char*, const char*, char*);
+
+#ifndef GNU
+	#ifndef TINY
+		void completion(const char inpt[], linenoiseCompletions *lc){
+		//Tab completion for linenoise lib
+		//TODO maybe get all files in /bin/ /sbin/ /usr/bin/ and history?
+			switch(inpt[0]){
+			case 'c':
+				linenoiseAddCompletion(lc, "cd");
+				break;
+			case 'e':
+				linenoiseAddCompletion(lc, "echo");
+				break;
+			case 'h':
+				linenoiseAddCompletion(lc, "help");
+				break;
+			case 'l':
+				linenoiseAddCompletion(lc, "ls");
+				linenoiseAddCompletion(lc, "lsblk");
+				break;
+			}
+		}
+	
+		char *hints(const char inpt[], int *color, int *bold){
+		//Creates a hint in purple
+			*color = 35;
+			*bold = 0;
+			if(!strcmp("h", inpt))
+				return "elp";
+			else if(!strcmp("ls", inpt))
+				return "blk";
+			else
+				return NULL;
+		}
+	#endif
+#endif
+
