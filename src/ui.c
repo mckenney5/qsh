@@ -52,9 +52,8 @@ int main(void){
 			#ifdef GNU
 				//get user input
 				strncpy(inpt, readline(prompt), MAX_USER_INPUT);
-			#else
-				printf("%s\n", prompt); //Workaround for https://github.com/antirez/linenoise/issues/158
-				input = linenoise("-> ");
+			#else	
+				input = linenoise(prompt);
 				strncpy(inpt, input, MAX_USER_INPUT);
 			#endif
 		#endif
