@@ -2,7 +2,7 @@
 In order of importance  
 
 ## General:
-- [X] add info for GNU readline and author info on linenoise in README
+- [X] add info for GNU readline and author info on linenoise-mob in README
 - [ ] be usable as a default shell
 - [ ] document and fix known bugs
 - [X] add to github account
@@ -24,7 +24,7 @@ In order of importance
 - [ ] test other libc implementations (musl, uClibc, etc)
 - [ ] test in cygin
 - [ ] write a manpage
-- [ ] fix [this bug](https://github.com/antirez/linenoise/issues/158) in linenoise lib
+- [X] fix [this bug](https://github.com/antirez/linenoise/issues/158) in linenoise lib
 
 ## Features:
 - [X] basic features (ex run a command, change directories)
