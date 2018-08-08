@@ -18,6 +18,7 @@
 #include <pwd.h> //gets username
 #include <sys/types.h> //run()
 #include <sys/wait.h> //run()
+#include <sys/stat.h> //isFile()
 
 /* Non-standard libs */
 #ifdef GNU
@@ -36,7 +37,7 @@
 #include "commands/help.h"
 
 #define MAX_USER_INPUT 1024 //how much data can be typed in the terminal
-#define BAD_COMMAND "Command not found." //What is returned when the command isnt found
+#define BAD_COMMAND "qsh : Command not found." //What is returned when the command isnt found
 #define MAX_ARGS 4096 //POSIX smallest ammount of command line args
 
 #ifdef DEBUGGING
@@ -72,12 +73,12 @@
 #define DEFAULT_EXEC_PATH2 "/usr/bin/"
 #define DEFAULT_EXEC_PATH3 "/sbin/"
 
-void interp(char[]); //checks if commands are valid, then runs them
-int find(const char[], const int, char*[]); //checks if a file exists, puts its location in *location
-int handle_var(char**);
-int get_var(const char[]);
-void run(const char*, const char*, char*);
-int call(const char *location, const char *program, char *argv[], int argc);
+static void interp(char[]); //checks if commands are valid, then runs them
+static int find(const char[], const int, char*[]); //checks if a file exists, puts its location in *location
+static int handle_var(char**);
+static void run(const char*, char*, char*);
+static int call(const char *location, char *program, char *argv[], int argc);
+static int isFile(const char* path); //checks if the path leads to a file
 
 #ifndef GNU
 	#ifndef TINY
