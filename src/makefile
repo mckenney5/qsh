@@ -8,7 +8,7 @@ STATIC: ui.c ui.h libs/linenoise.c commands/help.h commands/c.h
 	$(CC) -Wall -Wextra -Ofast -o qsh.static libs/linenoise.c ui.c -static
 
 clean:
-	rm qterm*
+	rm qsh*
 	rm history.log
 
 DEBUG:	ui.c ui.h libs/linenoise.c commands/help.h commands/c.h
