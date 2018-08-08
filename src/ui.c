@@ -12,8 +12,8 @@ int main(void){
 	#ifndef GNU
 		#ifndef TINY
 			//sets up autocompletion, hints, and a history for linenoise lib
-			linenoiseSetCompletionCallback(completion);
-			linenoiseSetHintsCallback(hints);
+			//linenoiseSetCompletionCallback(completion);
+			//linenoiseSetHintsCallback(hints);
 			linenoiseHistoryLoad(HIST_FILE);
 			char *input;
 		#endif

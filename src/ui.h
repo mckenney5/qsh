@@ -39,6 +39,12 @@
 #define BAD_COMMAND "Command not found." //What is returned when the command isnt found
 #define MAX_ARGS 4096 //POSIX smallest ammount of command line args
 
+#ifdef DEBUGGING
+	#define DEBUG 1
+#else
+	#define DEBUG 0
+#endif
+
 /* Foreground Colors */
 #ifndef NO_COLOR
 	#define RED "\x1B[31m"
@@ -75,6 +81,7 @@ int call(const char *location, const char *program, char *argv[], int argc);
 
 #ifndef GNU
 	#ifndef TINY
+		/*
 		void completion(const char inpt[], linenoiseCompletions *lc){
 		//Tab completion for linenoise lib
 		//TODO maybe get all files in /bin/ /sbin/ /usr/bin/ and history?
@@ -105,7 +112,7 @@ int call(const char *location, const char *program, char *argv[], int argc);
 				return "blk";
 			else
 				return NULL;
-		}
+		} */
 	#endif
 #endif
 
