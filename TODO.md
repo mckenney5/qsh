@@ -3,8 +3,8 @@ In order of importance
 
 ## General:
 - [X] add info for GNU readline and author info on linenoise-mob in README
-- [ ] be usable as a default shell
-- [ ] document and fix known bugs
+- [~] be *usable* as a default shell
+- [X] document and fix known bugs
 - [X] add to github account
 - [X] pretty up the README (ex links and pictures)
 - [ ] finish all 'TODO' tags in source code
@@ -16,8 +16,8 @@ In order of importance
 - [X] move TODO to its own file
 - [X] add a license (MIT or GPLv2)
 - [X] add color to prompt
-- [ ] audit code for memory leaks
-- [ ] audit code for buffer overflows
+- [X] audit code for memory leaks
+- [X] audit code for buffer overflows
 - [ ] clean up code
 - [ ] add more comments
 - [X] create a make file
@@ -36,11 +36,10 @@ In order of importance
 - [ ] tokenize special chars (&&, ;, etc) to run multiple commands at once
 - [ ] handle output redirection (>>, <, >, etc)
 - [ ] use history file to populate auto complete
-- [ ] use current dirctory to populate auto complete
+- [ ] use current directory to populate auto complete
 - [ ] add aliases
 - [ ] add aliase options (ex DOS, bash, ksh, zsh, etc);
 - [ ] add user defined aliases
-- [ ] handle linux pipes
 - [ ] add scripting
 - [ ] make a windows version
 - [ ] POSIX compliance
