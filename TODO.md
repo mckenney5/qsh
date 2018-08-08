@@ -3,10 +3,13 @@ In order of importance
 
 ## General:
 - [X] add info for GNU readline and author info on linenoise-mob in README
-- [~] be *usable* as a default shell
+- [X] be *usable* as a default shell
 - [X] document and fix known bugs
 - [X] add to github account
 - [X] pretty up the README (ex links and pictures)
+- [ ] create a road map
+- [ ] make command history be located in the home dir (ex ~/.qsh.history)
+- [ ] set a max history size (when its hit, start overwriting from the top down)
 - [ ] finish all 'TODO' tags in source code
 - [X] prioritize TODO list
 - [X] come up with a list of commands
@@ -31,6 +34,9 @@ In order of importance
 - [X] basic features (ex run a command, change directories)
 - [X] add a line editing feature
 - [ ] add command line args
+- [ ] add '~' operator to point to the users home dir (and use it for prompt too)
+- [ ] add '&' operator to spawn another process
+- [ ] add '\*' operator for 'any;
 - [ ] handle internal and env variables
 - [ ] handle linux pipes
 - [ ] tokenize special chars (&&, ;, etc) to run multiple commands at once
