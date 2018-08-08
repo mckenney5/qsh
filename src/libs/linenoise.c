@@ -396,12 +396,12 @@ failed:
 
 /* Get the length of the string ignoring escape-sequences */
 // TODO merge with columnPos
-static int strlenPerceived(const char* str) {
+/* static int strlenPerceived(const char* str) {
 	int len = 0;
 	if (str) {
 		int escaping = 0;
 		while(*str) {
-			if (escaping) { /* was terminating char reached? */
+			if (escaping) { * was terminating char reached? */ /*
 				if(*str >= 0x40 && *str <= 0x7E)
 					escaping = 0;
 			}
@@ -416,7 +416,7 @@ static int strlenPerceived(const char* str) {
 		}
 	}
 	return len;
-}
+} */
 
 /* Clear the screen. Used to handle ctrl+l */
 void linenoiseClearScreen(void) {
