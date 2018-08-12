@@ -13,7 +13,9 @@ associated with suckless).
 ## License
 This code (see exception) is licensed under the MIT license. See 'LICENSE' for details. 
 
-Note, the source code for [linenoise-mob](https://github.com/rain-1/linenoise-mob) is also included in this repo which is under the BSD 2-Clause "Simplified" License. See [src/libs/LICENSE](https://raw.githubusercontent.com/mckenney5/qsh/master/src/libs/LICENSE) for more details.
+Note, the source code for [linenoise-mob](https://github.com/rain-1/linenoise-mob) is also 
+included in this repo which is under the BSD 2-Clause "Simplified" License. 
+See [src/libs/linenoise/LICENSE](https://raw.githubusercontent.com/mckenney5/qsh/master/src/libs/linenoise/LICENSE) for more details.
 
 ## Compiling and Testing
 This program allows a couple of compiling options.
