@@ -7,8 +7,8 @@ int main(void){
 	strncpy(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
 	char hostname[255] = {'\0'}; //computer hostname for prompt
 	char cdir[255] = {'\0'}; //current working directory for prompt
-	char *user; //user for prompt
-	struct passwd *pass; //structure to grab user information for prompt
+	char user[255] = {'\0'}; //current user name
+
 	#ifndef GNU
 		#ifndef TINY
 			//sets up autocompletion, hints, and a history for linenoise lib
@@ -24,24 +24,23 @@ int main(void){
 		memset(inpt, '\0', MAX_USER_INPUT);
 		
 		//get the hostname of the computer
-		gethostname(hostname, sizeof(hostname));
+		get_hostname(hostname, sizeof(hostname));
 
 		//get the current working directory
-		getcwd(cdir, sizeof(cdir));
+		get_cwd(cdir, sizeof(cdir));
 
 		//get the username from the system
-		pass = getpwuid(getuid());
-		user = pass->pw_name;
+		get_user(user, sizeof(user));
 
 		//Display prompt
 		if(!strcmp("root", user))
 			snprintf(prompt, MAX_USER_INPUT,
 			"%s%s%s@%s%s:%s%s%s# ", RED, user, WHITE, RED, 
-			hostname, BLUE, cdir, RESET);	
+			hostname, CYAN, cdir, RESET);	
 		else
 			snprintf(prompt, MAX_USER_INPUT, 
 			"%s%s%s@%s%s:%s%s%s$ ", WHITE, user, RED, WHITE, 
-			hostname, BLUE, cdir, RESET);
+			hostname, CYAN, cdir, RESET);
 
 		#ifdef TINY
 			//get and clean the input

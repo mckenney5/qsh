@@ -14,11 +14,7 @@
 #include <stdlib.h>
 
 /* Standard Linux Libs */
-#include <unistd.h> //checks if files exist
-#include <pwd.h> //gets username
-#include <sys/types.h> //run()
-#include <sys/wait.h> //run()
-#include <sys/stat.h> //isFile()
+#include "libs/linux.h"
 
 /* Non-standard libs */
 #ifdef GNU
@@ -67,11 +63,7 @@
 	#define RESET ""
 #endif
 
-/* Defaults */
-#define DEFAULT_PROMPT "=> " //used only if a prompt isnt set
-#define DEFAULT_EXEC_PATH1 "/bin/"
-#define DEFAULT_EXEC_PATH2 "/usr/bin/"
-#define DEFAULT_EXEC_PATH3 "/sbin/"
+#define DEFAULT_PROMPT "=> "
 
 static void interp(char[]); //checks if commands are valid, then runs them
 static int find(const char[], const int, char*[]); //checks if a file exists, puts its location in *location
