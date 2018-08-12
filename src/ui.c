@@ -128,6 +128,8 @@ static void interp(char inpt[]){
 			return;
 		}
 	}
+	//check if the command has special chars and handle it (ex & and |)
+	if(check_special(inpt)) return;
 
 	//since the input is not a command, look for the file
 	char *token;
@@ -338,3 +340,31 @@ static int isFile(const char* path){
 	if(stat(path, &buf) == 0 && S_ISREG(buf.st_mode)) return 1;
 	else return 0;
 }
+
+int check_special(const char* inpt){
+	unsigned int i;
+	for(i=0; inpt[i] != '\0'; i++){
+		switch (inpt[i]){
+			case '|':
+				//handle pipes
+				stopgap(inpt);
+				return 1;
+				break;
+			case '&':
+				if(inpt[i+1] == '&')
+					//split commands
+					NULL;
+				else
+					//handle fork
+					stopgap(inpt);
+				return 1;
+				break;
+		}
+	}
+	return 0; //didnt find anything
+}
+
+void stopgap(const char* inpt){
+	system(inpt);
+}
+

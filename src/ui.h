@@ -79,6 +79,9 @@ static int handle_var(char**);
 static void run(const char*, char*, char*);
 static int call(const char *location, char *program, char *argv[], int argc);
 static int isFile(const char* path); //checks if the path leads to a file
+int check_special(const char*);
+void stopgap(const char*); //calls system shell [TEMP]
+
 
 #ifndef GNU
 	#ifndef TINY
