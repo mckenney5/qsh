@@ -27,7 +27,7 @@
 #else
 	#ifndef TINY
 		//if neither GNU nor TINY is defined, use this as the default
-		#include "libs/linenoise.h"
+		#include "libs/linenoise/linenoise.h"
 		#define HIST_FILE "history.log"
 	#endif
 #endif
