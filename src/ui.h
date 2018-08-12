@@ -13,8 +13,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+#if defined(unix) || defined(__unix__) || defined(__unix)
 /* Standard Linux Libs */
-#include "libs/linux.h"
+	#include "libs/linux.h"
+#else
+	#warn Operating system is not UNIX based, system calls may not work
+	//eventually check if _WIN32, then include libs/windows.h
+	#include "libs/linux.h"
+#endif
 
 /* Non-standard libs */
 #ifdef GNU

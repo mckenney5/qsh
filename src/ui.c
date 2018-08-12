@@ -8,7 +8,8 @@ int main(void){
 	char hostname[255] = {'\0'}; //computer hostname for prompt
 	char cdir[255] = {'\0'}; //current working directory for prompt
 	char user[255] = {'\0'}; //current user name
-
+	char last[255] = {'\0'}; //dir we are in
+	char home[255] = {'\0'}; //holds home dir
 	#ifndef GNU
 		#ifndef TINY
 			//sets up autocompletion, hints, and a history for linenoise lib
@@ -18,7 +19,7 @@ int main(void){
 			char *input=NULL;
 		#endif
 	#endif
-	
+		
 	while(1){
 		//Clear user input
 		memset(inpt, '\0', MAX_USER_INPUT);
@@ -28,6 +29,13 @@ int main(void){
 
 		//get the current working directory
 		get_cwd(cdir, sizeof(cdir));
+
+		//gets home dir
+		get_home(home, sizeof(home));
+
+		//get the dir we are in, if its home, use ~
+		get_cwd_last(last, sizeof(last));
+		if(!strcmp(home, cdir)) strncpy(last, "~", sizeof(last));
 
 		//get the username from the system
 		get_user(user, sizeof(user));
@@ -40,7 +48,7 @@ int main(void){
 		else
 			snprintf(prompt, MAX_USER_INPUT, 
 			"%s%s%s@%s%s:%s%s%s$ ", WHITE, user, RED, WHITE, 
-			hostname, CYAN, cdir, RESET);
+			hostname, CYAN, last, RESET);
 
 		#ifdef TINY
 			//get and clean the input
