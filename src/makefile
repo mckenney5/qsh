@@ -5,7 +5,7 @@ gnu: ui.c ui.h commands/help.h commands/c.h
 tiny: ui.c ui.h commands/help.h commands/c.h
 	$(CC) -Wall -Ofast -DTINY -o qsh.tiny ui.c
 static: ui.c ui.h libs/linenoise/linenoise.c libs/linenoise/linenoise.h commands/help.h commands/c.h
-	$(CC) -Wall -Ofast -o qsh.static libs/linenoise/linenoise.c ui.c -static
+	$(CC) -Wall -Os -o qsh.static libs/linenoise/linenoise.c ui.c -static
 
 clean:
 	rm qsh*
