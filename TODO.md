@@ -9,7 +9,7 @@ In order of importance
 - [ ] figure out cross platform stuff (make for linux first)
 - [ ] clean up code
 - [ ] add more comments
-- [ ] test other libc implementations (musl, uClibc, etc)
+- [X] test other libc implementations (_musl_, uClibc, etc)
 - [ ] test in cygwin
 - [ ] write a manpage
 
