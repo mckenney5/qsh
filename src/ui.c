@@ -108,7 +108,7 @@ int main(void){
 				#endif
 			#endif
 		} else
-			if(++bad_call >= 30) exit(1); //stops prompt from spamming
+			if(++bad_call >= 30) exit(2); //stops prompt from spamming
 
 		#ifndef GNU
 			#ifndef TINY
