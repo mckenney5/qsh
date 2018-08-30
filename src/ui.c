@@ -1,7 +1,18 @@
 /* Quick Shell's main file */
 
 #include "ui.h"
+
 int main(void){
+	//Ignore signals sent to us
+	//According to signal(2) this is portable
+	signal(SIGINT, SIG_IGN);
+	sigset_t mask;
+	sigfillset(&mask);
+	sigprocmask(SIG_SETMASK, &mask, NULL);
+
+	//keeps tally of all the NULLs that the CLI takes
+	unsigned int bad_call = 0;
+
 	char inpt[MAX_USER_INPUT]; //user input
 	char prompt[MAX_USER_INPUT]; //prompt to display
 	strncpy(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
@@ -61,7 +72,11 @@ int main(void){
 				strncpy(inpt, readline(prompt), MAX_USER_INPUT);
 			#else	
 				input = linenoise(prompt);
-				strncpy(inpt, input, MAX_USER_INPUT);
+				if(input != NULL)
+					strncpy(inpt, input, MAX_USER_INPUT);
+				else {
+					inpt[0] = '\0';
+				}
 			#endif
 		#endif
 
@@ -82,6 +97,7 @@ int main(void){
 			}
 		}
 		if(strcmp("\0", inpt)){ //if the inpt is NULL then skip
+			bad_call = 0; //since the user still has control, reset
 			interp(inpt);
 			#ifdef GNU
 				add_history(inpt);
@@ -91,7 +107,9 @@ int main(void){
 					linenoiseHistorySave(HIST_FILE);
 				#endif
 			#endif
-		}
+		} else
+			if(++bad_call >= 30) exit(1); //stops prompt from spamming
+
 		#ifndef GNU
 			#ifndef TINY
 				free(input);
