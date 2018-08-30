@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#if defined(unix) || defined(__unix__) || defined(__unix)
+#if defined(linux) || defined(__linux__) || defined(__linux)
 /* Standard Linux Libs */
 	#include "libs/linux.h"
 #else
@@ -79,7 +79,6 @@ static int call(const char *location, char *program, char *argv[], int argc);
 static int isFile(const char* path); //checks if the path leads to a file
 int check_special(const char*);
 void stopgap(const char*); //calls system shell [TEMP]
-
 
 #ifndef GNU
 	#ifndef TINY
