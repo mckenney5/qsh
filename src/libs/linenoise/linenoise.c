@@ -396,13 +396,13 @@ failed:
 
 /* Get the length of the string ignoring escape-sequences */
 // TODO merge with columnPos
-/*static int strlenPerceived(const char* str) {
+static int strlenPerceived(const char* str) {
 	int len = 0;
 	if (str) {
 		int escaping = 0;
 		while(*str) {
-			if (escaping) { *//* was terminating char reached? */
-/*				if(*str >= 0x40 && *str <= 0x7E)
+			if (escaping) { /* was terminating char reached? */
+				if(*str >= 0x40 && *str <= 0x7E)
 					escaping = 0;
 			}
 			else if(*str == '\x1b') {
@@ -416,7 +416,7 @@ failed:
 		}
 	}
 	return len;
-}*/
+}
 
 /* Clear the screen. Used to handle ctrl+l */
 void linenoiseClearScreen(void) {
@@ -1317,6 +1317,7 @@ void linenoiseFree(void *ptr) {
 
 /* ================================ History ================================= */
 
+#ifdef VALGRIND
 /* Free the history, but does not reset it. Only used when we have to
  * exit() to avoid memory leaks are reported by valgrind & co. */
 static void freeHistory(void) {
@@ -1328,11 +1329,14 @@ static void freeHistory(void) {
         free(history);
     }
 }
+#endif
 
 /* At exit we'll try to fix the terminal to the initial conditions. */
 static void linenoiseAtExit(void) {
     disableRawMode(STDIN_FILENO);
+#ifdef VALGRIND
     freeHistory();
+#endif
 }
 
 /* This is the API call to add a new entry in the linenoise history.
@@ -1403,6 +1407,10 @@ int linenoiseHistorySetMaxLen(int len) {
     return 1;
 }
 
+int linenoiseHistoryGetMaxLen(void) {
+    return history_max_len;
+}
+
 /* Save the history in the specified file. On success 0 is returned
  * otherwise -1 is returned. */
 int linenoiseHistorySave(const char *filename) {
@@ -1443,3 +1451,14 @@ int linenoiseHistoryLoad(const char *filename) {
     return 0;
 }
 
+/* Copy the history into the specified array.
+ * it must already be allocated to have at least destlen spaces.
+ * The size of the history is returned. */
+int linenoiseHistoryCopy(char** dest, int destlen) {
+    for(int i = 0; i < destlen; ++i) {
+        if (i >= history_len) break;
+        dest[i] = strdup(history[i]);
+    }
+
+    return history_len;
+}
