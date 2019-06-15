@@ -1112,6 +1112,11 @@ static int linenoiseEdit(int stdin_fd, int stdout_fd, char *buf, size_t buflen, 
                                 break;
                             }
                         }
+			else if(seq[2] == ';') {
+				if (read(l.ifd,seq,2) == -1) break;
+				if (seq[0] == '5' && seq[1] == 'C') linenoiseEditMoveWordEnd(&l);
+				if (seq[0] == '5' && seq[1] == 'D') linenoiseEditMoveWordStart(&l);
+			}
                     } else {
                         switch(seq[1]) {
                         case 'A': /* Up */
