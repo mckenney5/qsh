@@ -13,6 +13,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+/* Custom Libs */
+#include "libs/safestring.h"
+
 #if defined(linux) || defined(__linux__) || defined(__linux)
 /* Standard Linux Libs */
 	#include "libs/linux.h"

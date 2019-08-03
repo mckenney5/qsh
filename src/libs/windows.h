@@ -8,6 +8,9 @@
 /* Windows Specific */
 #include <windows.h>
 
+/* Custom */
+#include "safestring.h"
+
 /* Global READ ONLY vars */
 const char DEFAULT_EXEC_PATH1[] = "C:\\Windows\\System32\\";
 const char DEFAULT_EXEC_PATH2[] = "";
@@ -24,7 +27,7 @@ char *get_cwd(char *buf, size_t size){
 void get_user(char *buf, size_t size){
 	//struct passwd *pass;
 	//pass = getpwuid(getuid());
-	//strncpy(buf, pass->pw_name, size);
+	//strncpy2(buf, pass->pw_name, size);
 }
 
 

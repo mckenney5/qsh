@@ -11,6 +11,9 @@
 #include <sys/wait.h>	//run()
 #include <sys/stat.h>	//isFile();
 
+/* Custom */
+#include "safestring.h"
+
 #define _MAX_DIR_NAME 210
 
 /* Global READ ONLY vars */
@@ -36,14 +39,14 @@ void get_cwd_last(char* buf, size_t size){
 	char *last;
 	last = strrchr(buf, '/');
 	char temp[_MAX_DIR_NAME] = {'\0'};
-	strncpy(temp, last, _MAX_DIR_NAME);
+	strncpy2(temp, last, _MAX_DIR_NAME);
 	if(last == NULL)
 		perror("Error in program, NULL pointer in get_cwd_last");
 	else if(!strcmp("/", temp))
-		strncpy(buf, temp, size);
+		strncpy2(buf, temp, size);
 	else {	
 		//copy all but the '/'
-		strncpy(buf, temp, size);
+		strncpy2(buf, temp, size);
 		unsigned int i;
 		for(i=0; buf[i] != '\0'; i++)
 			buf[i] = buf[i+1];
@@ -54,13 +57,13 @@ void get_user(char *buf, size_t size){
 /* Used to get username */
 	struct passwd *pass;
 	pass = getpwuid(getuid());
-	strncpy(buf, pass->pw_name, size);
+	strncpy2(buf, pass->pw_name, size);
 }
 
 void get_home(char *buf, size_t size){
 /* Used to get the user's home dir location */
 	char user[255];
-	get_user(user, sizeof(user));
-	snprintf(buf, size, "%s%s", HOME, user); 
+	get_user(user, 255);
+	snprintf(buf, size, "%s%s", HOME, user); //ignore this warning, truncation is fine 
 }
 

@@ -15,7 +15,7 @@ int main(void){
 
 	char inpt[MAX_USER_INPUT]; //user input
 	char prompt[MAX_USER_INPUT]; //prompt to display
-	strncpy(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
+	strncpy2(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
 	char hostname[255] = {'\0'}; //computer hostname for prompt
 	char cdir[255] = {'\0'}; //current working directory for prompt
 	char user[255] = {'\0'}; //current user name
@@ -46,7 +46,7 @@ int main(void){
 
 		//get the dir we are in, if its home, use ~
 		get_cwd_last(last, sizeof(last));
-		if(!strcmp(home, cdir)) strncpy(last, "~", sizeof(last));
+		if(!strcmp(home, cdir)) strncpy2(last, "~", sizeof(last));
 
 		//get the username from the system
 		get_user(user, sizeof(user));
@@ -69,11 +69,11 @@ int main(void){
 		#else
 			#ifdef GNU
 				//get user input
-				strncpy(inpt, readline(prompt), MAX_USER_INPUT);
+				strncpy2(inpt, readline(prompt), MAX_USER_INPUT);
 			#else	
 				input = linenoise(prompt);
 				if(input != NULL)
-					strncpy(inpt, input, MAX_USER_INPUT);
+					strncpy2(inpt, input, MAX_USER_INPUT);
 				else {
 					inpt[0] = '\0';
 				}
@@ -169,7 +169,7 @@ static void interp(char inpt[]){
 			l++;
 		}
 	} else
-		strncpy(token_inpt, inpt, MAX_USER_INPUT);
+		strncpy2(token_inpt, inpt, MAX_USER_INPUT);
 
 	token = strtok(token_inpt, " ");
 	if(token == NULL){
@@ -186,7 +186,7 @@ static void interp(char inpt[]){
 			//if the file exists
 			//get the name of the program
 			char name[MAX_USER_INPUT];
-			strncpy(name, token, MAX_USER_INPUT);
+			strncpy2(name, token, MAX_USER_INPUT);
 			char args[MAX_USER_INPUT] = {'\0'};
 	
 			//remove the name from the args
@@ -209,26 +209,26 @@ static void interp(char inpt[]){
 static int find(const char inpt[], const int only_local, char *location[]){
 	if(only_local){
 		if(access(inpt, X_OK) != -1){
-			if(location != NULL) strncpy(*location, inpt, MAX_USER_INPUT);
+			if(location != NULL) strncpy2(*location, inpt, MAX_USER_INPUT);
 			return 1;	
 		} else return 0;
 	}
 
 	char temp[MAX_USER_INPUT*2] = {'\0'};
 
-	strncpy(temp, DEFAULT_EXEC_PATH1, MAX_USER_INPUT*2);
-	strncat(temp, inpt, MAX_USER_INPUT*2);
-	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy(*location, temp, MAX_USER_INPUT); return 1; }
+	strncpy2(temp, DEFAULT_EXEC_PATH1, MAX_USER_INPUT*2);
+	strcat(temp, inpt);
+	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy2(*location, temp, MAX_USER_INPUT); return 1; }
 	
 	memset(temp, '\0', MAX_USER_INPUT*2);
-	strncpy(temp, DEFAULT_EXEC_PATH2, MAX_USER_INPUT*2);
-	strncat(temp, inpt, MAX_USER_INPUT*2);
-	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy(*location, temp, MAX_USER_INPUT); return 1; }
+	strncpy2(temp, DEFAULT_EXEC_PATH2, MAX_USER_INPUT*2);
+	strcat(temp, inpt);
+	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy2(*location, temp, MAX_USER_INPUT); return 1; }
 	
 	memset(temp, '\0', MAX_USER_INPUT*2);
-	strncpy(temp, DEFAULT_EXEC_PATH3, MAX_USER_INPUT*2);
-	strncat(temp, inpt, MAX_USER_INPUT*2);
-	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy(*location, temp, MAX_USER_INPUT);  return 1; }
+	strncpy2(temp, DEFAULT_EXEC_PATH3, MAX_USER_INPUT*2);
+	strcat(temp, inpt);
+	if(access(temp, X_OK) != -1){ if(location != NULL) strncpy2(*location, temp, MAX_USER_INPUT);  return 1; }
 
 	return 0;
 
@@ -245,7 +245,7 @@ static int handle_var(char **inpt){
 			return 1;
 		}
 		char var[sizeof(token)];
-		strncpy(var, token, sizeof(var));
+		strncpy2(var, token, sizeof(var));
 		token = strtok(NULL, "=");
 		if(token == NULL){
 			puts("Var unset.");
@@ -263,7 +263,7 @@ static int handle_var(char **inpt){
 		*inpt = strchr(*inpt, '$');//DOES NOT REMOVE $!
 		char *token;
 		char input[strlen(*inpt)];
-		strncpy(input, *inpt, strlen(*inpt));
+		strncpy2(input, *inpt, strlen(*inpt));
 		token = strtok(input, " ");
 		if(token == NULL){
 			perror("Error in program, NULL pointer in handle_var().");
@@ -281,7 +281,7 @@ static int handle_var(char **inpt){
 		int i, l=0;
 		char var[MAX_USER_INPUT] = {'\0'};
 		char temp[MAX_USER_INPUT];
-		strncpy(temp, *inpt, MAX_USER_INPUT);
+		strncpy2(temp, *inpt, MAX_USER_INPUT);
 		for(i=1; i < MAX_USER_INPUT; i++){
 			if(temp[i] == '\0') break;
 			var[l] = temp[i];
@@ -313,13 +313,13 @@ static void run(const char *location, char *program, char* args){
 		char *token;
 		//printf("args: '%s'\n", args);
 		token = strtok(args, " ");
-		strncpy(args2[0], program, MAX_USER_INPUT);
+		strncpy2(args2[0], program, MAX_USER_INPUT);
 		for(i=1; i < MAX_ARGS && token != NULL; i++){
 			//Alocates the mem for arg, puts the token in
 			//And sets the next pointer to NULL as required
 			//by execv
 			args2[i] = calloc(sizeof(char), MAX_USER_INPUT);
-			strncpy(args2[i], token, MAX_USER_INPUT);
+			strncpy2(args2[i], token, MAX_USER_INPUT);
 			args2[i+1] = NULL;	
 			token = strtok(NULL, " ");
 			argc++;	
