@@ -213,8 +213,9 @@ static size_t defaultNextCharLen(const char *buf, size_t buf_len, size_t pos, si
 
 /* Read bytes of the next character */
 static size_t defaultReadCode(int fd, char *buf, size_t buf_len, int* c) {
+    int nread;
     if (buf_len < 1) return -1;
-    int nread = read(fd,&buf[0],1);
+    nread = read(fd,&buf[0],1);
     if (nread == 1) *c = buf[0];
     return nread;
 }
@@ -396,13 +397,13 @@ failed:
 
 /* Get the length of the string ignoring escape-sequences */
 // TODO merge with columnPos
-/* -- UNUSED --
+#if 0
 static int strlenPerceived(const char* str) {
 	int len = 0;
 	if (str) {
 		int escaping = 0;
 		while(*str) {
-			if (escaping) { //was terminating char reached?
+			if (escaping) { /* was terminating char reached? */
 				if(*str >= 0x40 && *str <= 0x7E)
 					escaping = 0;
 			}
@@ -417,7 +418,8 @@ static int strlenPerceived(const char* str) {
 		}
 	}
 	return len;
-} */
+}
+#endif
 
 /* Clear the screen. Used to handle ctrl+l */
 void linenoiseClearScreen(void) {
@@ -1087,7 +1089,7 @@ static int linenoiseEdit(int stdin_fd, int stdout_fd, char *buf, size_t buflen, 
         case ESC:    /* escape sequence */
             if (read(l.ifd,seq,1) == -1) break;
             /* ESC ? sequences */
-            if (seq[0] != '[' && seq[0] != '0') {
+            if (seq[0] != '[' && seq[0] != 'O') {
                 switch (seq[0]) {
                 case 'f':
                     linenoiseEditMoveWordEnd(&l);
@@ -1153,6 +1155,18 @@ static int linenoiseEdit(int stdin_fd, int stdout_fd, char *buf, size_t buflen, 
                 /* ESC O sequences. */
                 else if (seq[0] == 'O') {
                     switch(seq[1]) {
+                    case 'A': /* Up */
+                        linenoiseEditHistoryNext(&l, LINENOISE_HISTORY_PREV);
+                        break;
+                    case 'B': /* Down */
+                        linenoiseEditHistoryNext(&l, LINENOISE_HISTORY_NEXT);
+                        break;
+                    case 'C': /* Right */
+                        linenoiseEditMoveRight(&l);
+                        break;
+                    case 'D': /* Left */
+                        linenoiseEditMoveLeft(&l);
+                        break;
                     case 'H': /* Home */
                         linenoiseEditMoveHome(&l);
                         break;
@@ -1461,7 +1475,8 @@ int linenoiseHistoryLoad(const char *filename) {
  * it must already be allocated to have at least destlen spaces.
  * The size of the history is returned. */
 int linenoiseHistoryCopy(char** dest, int destlen) {
-    for(int i = 0; i < destlen; ++i) {
+    int i;
+    for(i = 0; i < destlen; ++i) {
         if (i >= history_len) break;
         dest[i] = strdup(history[i]);
     }
