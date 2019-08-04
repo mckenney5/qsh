@@ -3,7 +3,7 @@ In order of importance
 
 ## General:
 - [ ] create a road map
-- [ ] make command history be located in the home dir (ex ~/.qsh.history)
+- [X] make command history be located in the home dir (ex ~/.qsh.history)
 - [ ] set a max history size (when its hit, start overwriting from the top down)
 - [ ] finish all 'TODO' tags in source code
 - [ ] figure out cross platform stuff (make for linux first)
