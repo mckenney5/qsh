@@ -41,7 +41,7 @@ void get_cwd_last(char* buf, size_t size){
 	char temp[_MAX_DIR_NAME] = {'\0'};
 	strncpy2(temp, last, _MAX_DIR_NAME);
 	if(last == NULL)
-		perror("Error in program, NULL pointer in get_cwd_last");
+		perror("qsh : Error in program, NULL pointer in get_cwd_last");
 	else if(!strcmp("/", temp))
 		strncpy2(buf, temp, size);
 	else {	
@@ -62,7 +62,7 @@ void get_user(char *buf, size_t size){
 
 void get_home(char *buf, size_t size){
 /* Used to get the user's home dir location */
-	char user[255];
+	char user[255] = {'\0'};
 	get_user(user, 255);
 	snprintf(buf, size, "%s%s", HOME, user); //ignore this warning, truncation is fine 
 }

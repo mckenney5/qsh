@@ -1,6 +1,6 @@
 /* Commands that start with 'c' */
 #include <stdio.h> //perror
-#include <stdlib.h> //clear
+#include <stdlib.h> //clear, calloc, free
 #include <unistd.h> //chdir
 #include <string.h> //strcmp, strlen, etc
 #include <errno.h> //chdir errors
@@ -9,12 +9,13 @@ int cCommands(const char[]);
 int cCommands(const char inpt[]){
 	unsigned int i, size=0;
 	for(i=0; inpt[i] != '\0'; i++) size++; //get string length
-	char input[size];
+	char *input = calloc(size+1, sizeof(char));
 	char *token;
 	strncpy(input, inpt, size);
 	token = strtok(input, " ");
-	if(token == NULL){
-		perror("Error in program, NULL pointer in cCommands().");
+	if(token == NULL || input == NULL){
+		perror("qsh : Error in program, NULL pointer in cCommands().");
+		free(input);
 		return 1;
 	}
 
@@ -48,8 +49,11 @@ int cCommands(const char inpt[]){
 			} else
 				perror("Error ");
 		}
-	} else
+	} else {
+		free(input);
 		return 1;
+	}
+	free(input);
 	return 0;
 }
 

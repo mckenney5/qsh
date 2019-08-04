@@ -13,30 +13,22 @@ int main(void){
 	//keeps tally of all the NULLs that the CLI takes
 	unsigned int bad_call = 0;
 
-	char inpt[MAX_USER_INPUT]; //user input
-	char prompt[MAX_USER_INPUT]; //prompt to display
+	char inpt[MAX_USER_INPUT] = {'\0'}; //user input
+	char prompt[MAX_USER_INPUT] = {'\0'}; //prompt to display
 	strncpy2(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
 	char hostname[255] = {'\0'}; //computer hostname for prompt
 	char cdir[255] = {'\0'}; //current working directory for prompt
 	char user[255] = {'\0'}; //current user name
+	char old_user[255] = {'\0'}; //used to check if the user changed
 	char last[255] = {'\0'}; //dir we are in
 	char home[255] = {'\0'}; //holds home dir
 	char hist_file[255] = {'\0'}; //name and location of the history file
 	
-	#ifndef GNU
-		#ifndef TINY
-			//sets up autocompletion, hints, and a history for linenoise lib
-			//linenoiseSetCompletionCallback(completion);
-			//linenoiseSetHintsCallback(hints);
-			
-			//gets home dir
-			get_home(home, sizeof(home));
+	//gets history file location and loads it
+	get_hist(hist_file, sizeof(hist_file));
 
-			//sets history file location
-			strncpy(hist_file, home, 255);
-			strcat(hist_file, HIST_FILE);
-			printf("'%s'\n'", hist_file);
-			linenoiseHistoryLoad(hist_file);
+	#ifndef TINY
+		#ifndef GNU
 			char *input=NULL;
 		#endif
 	#endif
@@ -45,21 +37,27 @@ int main(void){
 		//Clear user input
 		memset(inpt, '\0', MAX_USER_INPUT);
 		
-		//gets home dir
-		get_home(home, sizeof(home));
-	
 		//get the hostname of the computer
 		get_hostname(hostname, sizeof(hostname));
 
 		//get the current working directory
 		get_cwd(cdir, sizeof(cdir));
 
+		//gets home dir
+		get_home(home, sizeof(home));
+
 		//get the dir we are in, if its home, use ~
 		get_cwd_last(last, sizeof(last));
 		if(!strcmp(home, cdir)) strncpy2(last, "~", sizeof(last));
 
-		//get the username from the system
+		//get the username from the system and checks for changes
 		get_user(user, sizeof(user));
+		if(old_user[0] == '\0'){
+			strncpy2(old_user, user, 255);
+		} else if(strcmp(old_user, user)){
+			strncpy2(old_user, user, 255);
+			get_hist(hist_file, 255);
+		}
 	
 		//Display prompt
 		if(!strcmp("root", user))
@@ -82,6 +80,7 @@ int main(void){
 				strncpy2(inpt, readline(prompt), MAX_USER_INPUT);
 			#else	
 				input = linenoise(prompt);
+				//strncpy2(input, linenoise(prompt), MAX_USER_INPUT);
 				if(input != NULL)
 					strncpy2(inpt, input, MAX_USER_INPUT);
 				else {
@@ -109,6 +108,7 @@ int main(void){
 		if(strcmp("\0", inpt)){ //if the inpt is NULL then skip
 			bad_call = 0; //since the user still has control, reset
 			interp(inpt);
+
 			#ifdef GNU
 				add_history(inpt);
 			#else
@@ -124,6 +124,7 @@ int main(void){
 			#ifndef TINY
 				free(input);
 				input = NULL;
+
 			#endif
 		#endif
 
@@ -195,7 +196,7 @@ static void interp(char inpt[]){
 		if(isFile(program)){
 			//if the file exists
 			//get the name of the program
-			char name[MAX_USER_INPUT];
+			char name[MAX_USER_INPUT] = {'\0'};
 			strncpy2(name, token, MAX_USER_INPUT);
 			char args[MAX_USER_INPUT] = {'\0'};
 	
@@ -371,6 +372,7 @@ static int call(const char *location, char *program, char *argv[], int argc){
 }
 
 static int isFile(const char* path){
+	return 1;
 	struct stat buf;
 	if(stat(path, &buf) == 0 && S_ISREG(buf.st_mode)) return 1;
 	else return 0;
@@ -401,5 +403,26 @@ int check_special(const char* inpt){
 
 void stopgap(const char* inpt){
 	system(inpt);
+}
+
+int get_hist(char* hist_file, size_t size){
+	char home[255] = {'\0'}; //TODO remove hard coding
+	#ifndef GNU
+		#ifndef TINY
+			//sets up autocompletion, hints, and a history for linenoise lib
+			//linenoiseSetCompletionCallback(completion);
+			//linenoiseSetHintsCallback(hints);
+			
+			//gets home dir
+			get_home(home, sizeof(home));
+
+			//sets history file location
+			strncpy(hist_file, home, size);
+			strcat(hist_file, HIST_FILE);
+			if(linenoiseHistoryLoad(hist_file) == -1) puts("qsh: Error loading history file");
+			return 0;
+		#endif
+	#endif
+	return 1;
 }
 
