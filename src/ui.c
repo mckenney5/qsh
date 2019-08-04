@@ -21,12 +21,22 @@ int main(void){
 	char user[255] = {'\0'}; //current user name
 	char last[255] = {'\0'}; //dir we are in
 	char home[255] = {'\0'}; //holds home dir
+	char hist_file[255] = {'\0'}; //name and location of the history file
+	
 	#ifndef GNU
 		#ifndef TINY
 			//sets up autocompletion, hints, and a history for linenoise lib
 			//linenoiseSetCompletionCallback(completion);
 			//linenoiseSetHintsCallback(hints);
-			linenoiseHistoryLoad(HIST_FILE);
+			
+			//gets home dir
+			get_home(home, sizeof(home));
+
+			//sets history file location
+			strncpy(hist_file, home, 255);
+			strcat(hist_file, HIST_FILE);
+			printf("'%s'\n'", hist_file);
+			linenoiseHistoryLoad(hist_file);
 			char *input=NULL;
 		#endif
 	#endif
@@ -35,14 +45,14 @@ int main(void){
 		//Clear user input
 		memset(inpt, '\0', MAX_USER_INPUT);
 		
+		//gets home dir
+		get_home(home, sizeof(home));
+	
 		//get the hostname of the computer
 		get_hostname(hostname, sizeof(hostname));
 
 		//get the current working directory
 		get_cwd(cdir, sizeof(cdir));
-
-		//gets home dir
-		get_home(home, sizeof(home));
 
 		//get the dir we are in, if its home, use ~
 		get_cwd_last(last, sizeof(last));
@@ -50,7 +60,7 @@ int main(void){
 
 		//get the username from the system
 		get_user(user, sizeof(user));
-
+	
 		//Display prompt
 		if(!strcmp("root", user))
 			snprintf(prompt, MAX_USER_INPUT,
@@ -104,7 +114,7 @@ int main(void){
 			#else
 				#ifndef TINY
 					linenoiseHistoryAdd(inpt);
-					linenoiseHistorySave(HIST_FILE);
+					linenoiseHistorySave(hist_file);
 				#endif
 			#endif
 		} else

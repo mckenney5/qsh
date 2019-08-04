@@ -33,7 +33,7 @@
 	#ifndef TINY
 		//if neither GNU nor TINY is defined, use this as the default
 		#include "libs/linenoise/linenoise.h"
-		#define HIST_FILE "history.log"
+		#define HIST_FILE "/.qsh.history"
 	#endif
 #endif
 

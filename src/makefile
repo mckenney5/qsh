@@ -9,7 +9,6 @@ static: ui.c ui.h libs/linenoise/linenoise.c libs/linenoise/linenoise.h commands
 
 clean:
 	rm qsh*
-	rm history.log
 
 debug:	ui.c ui.h libs/linenoise/linenoise.c libs/linenoise/linenoise.h commands/help.h commands/c.h libs/linux.h libs/safestring.h
 	# Used if you want debugging features on
