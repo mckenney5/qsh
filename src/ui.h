@@ -44,6 +44,7 @@
 #define MAX_USER_INPUT 1024 //how much data can be typed in the terminal
 #define BAD_COMMAND "qsh : Command not found." //What is returned when the command isnt found
 #define MAX_ARGS 4096 //POSIX smallest ammount of command line args
+#define VAR_SIZE 255 //standard size of vars in ui.c
 
 #ifdef DEBUGGING
 	#define DEBUG 1

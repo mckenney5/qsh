@@ -16,13 +16,13 @@ int main(void){
 	char inpt[MAX_USER_INPUT] = {'\0'}; //user input
 	char prompt[MAX_USER_INPUT] = {'\0'}; //prompt to display
 	strncpy2(prompt, DEFAULT_PROMPT, MAX_USER_INPUT);
-	char hostname[255] = {'\0'}; //computer hostname for prompt
-	char cdir[255] = {'\0'}; //current working directory for prompt
-	char user[255] = {'\0'}; //current user name
-	char old_user[255] = {'\0'}; //used to check if the user changed
-	char last[255] = {'\0'}; //dir we are in
-	char home[255] = {'\0'}; //holds home dir
-	char hist_file[255] = {'\0'}; //name and location of the history file
+	char hostname[VAR_SIZE] = {'\0'}; //computer hostname for prompt
+	char cdir[VAR_SIZE] = {'\0'}; //current working directory for prompt
+	char user[VAR_SIZE] = {'\0'}; //current user name
+	char old_user[VAR_SIZE] = {'\0'}; //used to check if the user changed
+	char last[VAR_SIZE] = {'\0'}; //dir we are in
+	char home[VAR_SIZE] = {'\0'}; //holds home dir
+	char hist_file[VAR_SIZE] = {'\0'}; //name and location of the history file
 	
 	//gets history file location and loads it
 	get_hist(hist_file, sizeof(hist_file));
@@ -53,10 +53,10 @@ int main(void){
 		//get the username from the system and checks for changes
 		get_user(user, sizeof(user));
 		if(old_user[0] == '\0'){
-			strncpy2(old_user, user, 255);
+			strncpy2(old_user, user, VAR_SIZE);
 		} else if(strcmp(old_user, user)){
-			strncpy2(old_user, user, 255);
-			get_hist(hist_file, 255);
+			strncpy2(old_user, user, VAR_SIZE);
+			get_hist(hist_file, VAR_SIZE);
 		}
 	
 		//Display prompt
@@ -406,7 +406,7 @@ void stopgap(const char* inpt){
 }
 
 int get_hist(char* hist_file, size_t size){
-	char home[255] = {'\0'}; //TODO remove hard coding
+	char home[VAR_SIZE] = {'\0'};
 	#ifndef GNU
 		#ifndef TINY
 			//sets up autocompletion, hints, and a history for linenoise lib
