@@ -15,7 +15,7 @@ In order of importance
 
 ## Features:
 - [ ] add command line args
-- [ ] handle ctrl^C (return to prompt, instead of closing)
+- [X] handle ctrl^C (return to prompt, instead of closing)
 - [ ] add '~' operator to point to the users home dir (and use it for prompt too)
 - [ ] add '&' operator to spawn another process
 - [ ] add '\*' operator for 'any;
