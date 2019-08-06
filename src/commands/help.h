@@ -4,7 +4,9 @@
 #include <stdio.h>
 
 #ifdef GNU
-	#define CREDITS " "
+	#define CREDITS "This program does line editing via GNU Readline\n\n"\
+			"GNU Readline is licened under the GPL and is\n"\
+			"Copyright (C) 1989-2014 Free Software Foundation, Inc."
 #endif
 
 #ifdef TINY
@@ -33,9 +35,9 @@ void default_aliases(); //lists all default internal command aliases
 void help(){
 	puts("qsh - a small, lightweight command interpreter");
 	printf("Version: %s\n", VERSION);
-	puts("===================================================");
+	puts("======================================================");
 	printf("The source code of this program is available here\n%s\n\n%s\n", REPO, CREDITS);
-	puts("===================================================\n");
+	puts("======================================================\n");
 	puts("Command line args:");
 	command_args();
 	puts("\nInternal commands:");
@@ -60,3 +62,4 @@ void commands(){
 void default_aliases(){
 	puts("\tNone.");
 }
+
