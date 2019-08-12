@@ -135,6 +135,7 @@ int main(void){
 static void interp(char inpt[]){
 /* This should first check if the first char is a command */
 	int status=1;
+	has_home(inpt);
 	switch (inpt[0]){
 		case 'c':
 			status = cCommands(inpt);
@@ -424,5 +425,38 @@ int get_hist(char* hist_file, size_t size){
 		#endif
 	#endif
 	return 1;
+}
+
+char* has_home(char inpt[]){
+	int c, a, b = 0; //TODO rewrite vars to be more readable
+	int replaced = 0;
+	char input[MAX_USER_INPUT] = {'\0'};
+	for(c=0; c < MAX_USER_INPUT && inpt[c] != '\0'; c++){
+		if(inpt[c] == '~' && inpt[c+1] == '/'){
+			replaced = 1;
+			for(a=0; a < MAX_USER_INPUT && inpt[a] != '\0'; a++){
+				if(a != c){
+					input[b] = inpt[a];
+					b++;
+				} else {
+					//add home and add that to b
+					char home[VAR_SIZE] = {'\0'};
+					get_home(home, VAR_SIZE);
+					if(strlen(inpt) + strlen(home) >= MAX_USER_INPUT) perror("qsh : Error user input too big");
+					strcat(input, home);
+					b += strlen(home);
+					input[b++] = '/';
+					a = c+1;
+				}
+			}
+		}
+		
+	}
+	if(replaced == 0)
+		NULL;
+	else {
+		strncpy2(inpt, input, MAX_USER_INPUT);
+	}
+	return inpt;
 }
 
