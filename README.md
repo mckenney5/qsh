@@ -38,7 +38,7 @@ The simplest way is to compile by `make`
 * NO_COLOR (`-DNO_COLOR`)	: disables color in the prompt **ONLY**
 
 ## How to contribute
-Take a look at the TODO list for what still needs to get done.
+Take a look at the ROADMAP for what still needs to get done for the next version.
 
 Then:
 1. Fork the repository
@@ -47,3 +47,4 @@ Then:
 4. Make changes
 5. **Test again**
 6. After all of that **_then_** submit a merge/pull request
+
