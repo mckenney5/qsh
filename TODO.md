@@ -56,7 +56,7 @@ List of completed items from previous releases
 - [X] fix [this bug](https://github.com/antirez/linenoise/issues/158) in linenoise lib
 
 ## Features:
-- [X] basic features (ex run a command, change directories)
-- [X] add a line editing feature
+- [X] ~~basic features (ex run a command, change directories)~~
+- [X] ~~add a line editing feature~~
 
 
