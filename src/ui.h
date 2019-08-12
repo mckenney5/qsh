@@ -85,6 +85,7 @@ int check_special(const char*);
 void stopgap(const char*); //calls system shell [TEMP]
 int get_hist(char*, size_t);
 char* has_home(char[]);
+int ui(void);
 
 #ifndef GNU
 	#ifndef TINY

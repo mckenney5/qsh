@@ -9,7 +9,7 @@ List of minimum features before every release
 - [ ] write a manpage
 
 ### Features:
-- [ ] add command line args
+- [X] add command line args
 - [X] handle ctrl^C (return to prompt, instead of closing)
 - [X] add '~' operator to point to the users home dir (and use it for prompt too)
 - [ ] use history file to populate auto complete

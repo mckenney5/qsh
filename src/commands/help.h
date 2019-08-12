@@ -48,7 +48,8 @@ void help(){
 }
 
 void command_args(){
-	puts("\tNone.");
+	puts("\t--help\t\tThis stuff");
+	puts("\t--run <cmd>\tRuns a command then exits");
 }
 
 void commands(){

@@ -2,7 +2,24 @@
 
 #include "ui.h"
 
-int main(void){
+int main(int argc, char *argv[]){
+	if(DEBUG) printf("called with '%d' args\n", argc);
+	if(argc == 1)
+		return ui();
+	
+	if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
+		help();
+	else if(!strcmp(argv[1], "-r") || !strcmp(argv[1], "--run")){
+		if(argc == 3)
+			interp(argv[2]);
+		else
+			perror("qsh : Missing args, syntax qsh -r <command>");
+	} else
+		help();
+	return 0;
+}
+
+int ui(void){
 	//Ignore signals sent to us
 	//According to signal(2) this is portable
 	signal(SIGINT, SIG_IGN);
@@ -201,10 +218,16 @@ static void interp(char inpt[]){
 			strncpy2(name, token, MAX_USER_INPUT);
 			char args[MAX_USER_INPUT] = {'\0'};
 	
+			//checks if command has args
+			int has_args = 0;
+			for(i=0; inpt[i] != '\0'; i++)
+				if(inpt[i] == ' ') has_args = 1;
+			
 			//remove the name from the args
-			for(i=0; inpt[strlen(name)+i+1] != '\0'; i++)
-				args[i] = inpt[strlen(name)+i+1];
-	
+			if(has_args){
+				for(i=0; inpt[strlen(name)+i+1] != '\0'; i++)
+					args[i] = inpt[strlen(name)+i+1];
+			}
 			//run the program
 			run(program, name, args);
 
