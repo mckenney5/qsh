@@ -5,7 +5,7 @@
 
 #ifdef GNU
 	#define CREDITS "This program does line editing via GNU Readline\n\n"\
-			"GNU Readline is licened under the GPL and is\n"\
+			"GNU Readline is licensed under the GPL and is\n"\
 			"Copyright (C) 1989-2014 Free Software Foundation, Inc."
 #endif
 
