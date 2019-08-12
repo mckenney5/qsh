@@ -13,5 +13,5 @@ clean:
 
 debug:	ui.c ui.h libs/linenoise/linenoise.c libs/linenoise/linenoise.h commands/help.h commands/c.h libs/linux.h libs/safestring.h
 	# Used if you want debugging features on
-	$(CC) -Wall -Wextra -Og -g -DDEBUGGING -o qsh.debugging libs/linenoise/linenoise.c ui.c
+	$(CC) -Wall -Wextra -O0 -g -DDEBUGGING -o qsh.debugging libs/linenoise/linenoise.c ui.c
 
