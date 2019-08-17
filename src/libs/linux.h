@@ -17,8 +17,8 @@
 #define _MAX_DIR_NAME 210
 
 /* Global READ ONLY vars */
-const char DEFAULT_EXEC_PATH1[] = "/bin/";
-const char DEFAULT_EXEC_PATH2[] = "/usr/bin/";
+const char DEFAULT_EXEC_PATH1[] = "/usr/bin/";
+const char DEFAULT_EXEC_PATH2[] = "/bin/";
 const char DEFAULT_EXEC_PATH3[] = "/sbin";
 
 static const char HOME[] = "/home/";
