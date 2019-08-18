@@ -8,6 +8,9 @@
  * -DNO_COLOR	: Disables color for the prompt (note does not affect readline nor linenoise)
  */
 
+#ifndef _using_ui_h
+#define _using_ui_h
+
 /* Standard C Libs */
 #include <stdio.h>
 #include <string.h>
@@ -33,7 +36,7 @@
 	#ifndef TINY
 		//if neither GNU nor TINY is defined, use this as the default
 		#include "libs/linenoise/linenoise.h"
-		#define HIST_FILE "/.qsh.history"
+		#include "hints.h"
 	#endif
 #endif
 
@@ -83,44 +86,9 @@ static int call(const char *location, char *program, char *argv[], int argc);
 static int isFile(const char* path); //checks if the path leads to a file
 int check_special(const char*);
 void stopgap(const char*); //calls system shell [TEMP]
-int get_hist(char*, size_t);
+//int get_hist(char*, size_t);
 char* has_home(char[]);
 int ui(void);
 
-#ifndef GNU
-	#ifndef TINY
-		/*
-		void completion(const char inpt[], linenoiseCompletions *lc){
-		//Tab completion for linenoise lib
-		//TODO maybe get all files in /bin/ /sbin/ /usr/bin/ and history?
-			switch(inpt[0]){
-			case 'c':
-				linenoiseAddCompletion(lc, "cd");
-				break;
-			case 'e':
-				linenoiseAddCompletion(lc, "echo");
-				break;
-			case 'h':
-				linenoiseAddCompletion(lc, "help");
-				break;
-			case 'l':
-				linenoiseAddCompletion(lc, "ls");
-				linenoiseAddCompletion(lc, "lsblk");
-				break;
-			}
-		}
-	
-		char *hints(const char inpt[], int *color, int *bold){
-		//Creates a hint in purple
-			*color = 35;
-			*bold = 0;
-			if(!strcmp("h", inpt))
-				return "elp";
-			else if(!strcmp("ls", inpt))
-				return "blk";
-			else
-				return NULL;
-		} */
-	#endif
 #endif
 

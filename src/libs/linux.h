@@ -1,5 +1,8 @@
 /* This library is for Linux system calls */
 
+#ifndef _using_linux_h
+#define _using_linux_h
+
 /* Universal */
 #include <stdio.h>
 #include <strings.h>
@@ -66,4 +69,6 @@ void get_home(char *buf, size_t size){
 	get_user(user, 255);
 	snprintf(buf, size, "%s%s", HOME, user); //ignore this warning, truncation is fine 
 }
+
+#endif
 

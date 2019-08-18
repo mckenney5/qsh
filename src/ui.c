@@ -39,14 +39,15 @@ int ui(void){
 	char old_user[VAR_SIZE] = {'\0'}; //used to check if the user changed
 	char last[VAR_SIZE] = {'\0'}; //dir we are in
 	char home[VAR_SIZE] = {'\0'}; //holds home dir
-	char hist_file[VAR_SIZE] = {'\0'}; //name and location of the history file
-	
-	//gets history file location and loads it
-	get_hist(hist_file, sizeof(hist_file));
 
 	#ifndef TINY
 		#ifndef GNU
+			//gets history file location and loads it
+			char hist_file[VAR_SIZE] = {'\0'}; //name and location of the history file
+			get_hist(hist_file, sizeof(hist_file));
 			char *input=NULL;
+			linenoiseSetCompletionCallback(completion);
+ 			linenoiseSetHintsCallback(hints);
 		#endif
 	#endif
 		
@@ -427,27 +428,6 @@ int check_special(const char* inpt){
 
 void stopgap(const char* inpt){
 	system(inpt);
-}
-
-int get_hist(char* hist_file, size_t size){
-	char home[VAR_SIZE] = {'\0'};
-	#ifndef GNU
-		#ifndef TINY
-			//sets up autocompletion, hints, and a history for linenoise lib
-			//linenoiseSetCompletionCallback(completion);
-			//linenoiseSetHintsCallback(hints);
-			
-			//gets home dir
-			get_home(home, sizeof(home));
-
-			//sets history file location
-			strncpy(hist_file, home, size);
-			strcat(hist_file, HIST_FILE);
-			if(linenoiseHistoryLoad(hist_file) == -1) puts("qsh: Error loading history file");
-			return 0;
-		#endif
-	#endif
-	return 1;
 }
 
 char* has_home(char inpt[]){
