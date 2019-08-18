@@ -1,22 +1,7 @@
 # Road Map
 List of minimum features before every release
 
-## Alpha 0.0.4 [NEXT VERSION]
-### General:
-- [X] create a road map
-- [X] make command history be located in the home dir (ex ~/.qsh.history)
-- [X] test other libc implementations (*musl*, uClibc, etc)
-- [X] write a manpage
-
-### Features:
-- [X] add command line args
-- [X] handle ctrl^C (return to prompt, instead of closing)
-- [X] add '~' operator to point to the users home dir (and use it for prompt too)
-- [ ] use history file to populate auto complete
-- [ ] use current directory to populate auto complete
-
-
-## Alpha 0.0.5
+## Alpha 0.0.5 [NEXT VERSION]
 ### General
 - [ ] set a max history size (when its hit, start overwriting from the top down)
 - [ ] test in cygwin
@@ -58,6 +43,21 @@ List of minimum features before every release
 # Completed
 List of completed items from previous releases
 
+## Alpha 0.0.4
+### General:
+- [X] ~~create a road map~~
+- [X] ~~make command history be located in the home dir (ex ~/.qsh.history)~~
+- [X] ~~test other libc implementations (*musl*, uClibc, etc)~~
+- [X] ~~write a manpage~~
+
+### Features:
+- [X] ~~add command line args~~
+- [X] ~~handle ctrl^C (return to prompt, instead of closing)~~
+- [X] ~~add '~' operator to point to the users home dir (and use it for prompt too)~~
+- [X] ~~use history file to populate auto complete~~
+- [X] ~~use current directory to populate auto complete~~
+
+
 ## Alpha 0.0.3
 ### General:
 - [X] ~~create a road map~~
@@ -67,6 +67,7 @@ List of completed items from previous releases
 ### Features:
 - [X] ~~handle ctrl^C (return to prompt, instead of closing)~~
 - [X] ~~add '~' operator to point to the users home dir (and use it for prompt too)~~
+
 
 ## Alpha 0.0.2
 ### General:
