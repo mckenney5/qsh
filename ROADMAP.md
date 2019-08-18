@@ -6,7 +6,7 @@ List of minimum features before every release
 - [X] create a road map
 - [X] make command history be located in the home dir (ex ~/.qsh.history)
 - [X] test other libc implementations (*musl*, uClibc, etc)
-- [ ] write a manpage
+- [X] write a manpage
 
 ### Features:
 - [X] add command line args
