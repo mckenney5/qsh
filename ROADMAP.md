@@ -4,7 +4,7 @@ List of minimum features before every release
 ## Alpha 0.0.5 [NEXT VERSION]
 ### General
 - [ ] set a max history size (when its hit, start overwriting from the top down)
-- [ ] test in cygwin
+- [ ] update screenshot
 
 ### Features
 - [ ] handle linux pipes
@@ -18,7 +18,6 @@ List of minimum features before every release
 ## Beta 0.1.0
 ### General:
 - [ ] finish all 'TODO' tags in source code
-- [ ] figure out cross platform stuff (make for linux first)
 - [ ] clean up code
 - [ ] add more comments
 - [ ] squash all bugs
@@ -28,14 +27,22 @@ List of minimum features before every release
 - [ ] add aliases
 - [ ] add aliase options (ex DOS, bash, zsh, etc);
 - [ ] add user defined aliases
-- [ ] add scripting
+- [ ] add simple scripting
+- [ ] add a config file
 
 
 ## Stable Release 1.0.0
 ### General
 - [ ] all TODO list items completed
 - [ ] software is confirmed stable
-- [ ] be a drop in replacement for `sh` (or something close to)
+- [ ] software confirmed bug free
+- [ ] software confirmed to not have memory leaks
+- [ ] software is optimized for speed and size
+- [ ] finish scripting
+
+
+## Wish List
+- [ ] be a competitior for bash/zsh/fish
 - [ ] make a windows version
 - [ ] POSIX compliant
 
