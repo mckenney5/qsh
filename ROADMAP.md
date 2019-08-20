@@ -1,25 +1,10 @@
 # Road Map
 List of minimum features before every release
 
-## Alpha 0.0.4 [NEXT VERSION]
-### General:
-- [X] create a road map
-- [X] make command history be located in the home dir (ex ~/.qsh.history)
-- [X] test other libc implementations (*musl*, uClibc, etc)
-- [ ] write a manpage
-
-### Features:
-- [X] add command line args
-- [X] handle ctrl^C (return to prompt, instead of closing)
-- [X] add '~' operator to point to the users home dir (and use it for prompt too)
-- [ ] use history file to populate auto complete
-- [ ] use current directory to populate auto complete
-
-
-## Alpha 0.0.5
+## Alpha 0.0.5 [NEXT VERSION]
 ### General
 - [ ] set a max history size (when its hit, start overwriting from the top down)
-- [ ] test in cygwin
+- [ ] update screenshot
 
 ### Features
 - [ ] handle linux pipes
@@ -33,7 +18,6 @@ List of minimum features before every release
 ## Beta 0.1.0
 ### General:
 - [ ] finish all 'TODO' tags in source code
-- [ ] figure out cross platform stuff (make for linux first)
 - [ ] clean up code
 - [ ] add more comments
 - [ ] squash all bugs
@@ -43,20 +27,43 @@ List of minimum features before every release
 - [ ] add aliases
 - [ ] add aliase options (ex DOS, bash, zsh, etc);
 - [ ] add user defined aliases
-- [ ] add scripting
+- [ ] add simple scripting
+- [ ] add a config file
 
 
 ## Stable Release 1.0.0
 ### General
 - [ ] all TODO list items completed
 - [ ] software is confirmed stable
-- [ ] be a drop in replacement for `sh` (or something close to)
+- [ ] software confirmed bug free
+- [ ] software confirmed to not have memory leaks
+- [ ] software is optimized for speed and size
+- [ ] finish scripting
+
+
+## Wish List
+- [ ] be a competitior for bash/zsh/fish
 - [ ] make a windows version
 - [ ] POSIX compliant
 
 
 # Completed
 List of completed items from previous releases
+
+## Alpha 0.0.4
+### General:
+- [X] ~~create a road map~~
+- [X] ~~make command history be located in the home dir (ex ~/.qsh.history)~~
+- [X] ~~test other libc implementations (*musl*, uClibc, etc)~~
+- [X] ~~write a manpage~~
+
+### Features:
+- [X] ~~add command line args~~
+- [X] ~~handle ctrl^C (return to prompt, instead of closing)~~
+- [X] ~~add '~' operator to point to the users home dir (and use it for prompt too)~~
+- [X] ~~use history file to populate auto complete~~
+- [X] ~~use current directory to populate auto complete~~
+
 
 ## Alpha 0.0.3
 ### General:
@@ -67,6 +74,7 @@ List of completed items from previous releases
 ### Features:
 - [X] ~~handle ctrl^C (return to prompt, instead of closing)~~
 - [X] ~~add '~' operator to point to the users home dir (and use it for prompt too)~~
+
 
 ## Alpha 0.0.2
 ### General:

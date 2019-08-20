@@ -1,49 +1,58 @@
 .\" Man page for Quick Shell
-.TH QSH "1" "August 2018" "ALPHA 0.0.3" "General Commands Manual"
+.TH QSH "1" "August 2018" "ALPHA 0.0.4" "General Commands Manual"
 .SH NAME
 qsh \- a small, lightweight, command interpreter
+.SH SYNOPSIS
+qsh [options]
 .SH DESCRIPTION
 .PP
 This is the rewrite of quick terminal, quick terminal server edition, and QTerminal.
-Quick Shell aims at replacing bash(1) or zsh(1) with a smaller and lighter program and follows
-the suckless philosophy
+Quick Shell aims at replacing bash(1) or zsh(1) with a smaller and lighter program
+and follows the suckless philosophy. The default configuration uses linenoise(3) for line editing.
+.SH OPTIONS
+All options have a short and long version corresponding to with its first char.
+
+--run <command>	Runs a command then exits
+
+--help			Displays the help then exits
+.SH FILES
+List of specific files created and used by qsh.
+
+~/.qsh.history		List of command history
+
 .SH AUTHOR
 Written by Adam McKenney and others from across the globe
 .SH "REPORTING BUGS"
 Reports go to the main project page: 
-.br
+
 <https://github.com/mckenney5/qsh>
 .SH COPYRIGHT
 Copyright \(co 2019 Adam McKenney
-.br
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
-.br
 of this software and associated documentation files (the "Software"), to deal
-.br
 in the Software without restriction, including without limitation the rights
-.br
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-.br
 copies of the Software, and to permit persons to whom the Software is
-.br
 furnished to do so, subject to the following conditions:
-.br
 The above copyright notice and this permission notice shall be included in all
-.br
 copies or substantial portions of the Software.
-.br
-.br
+
+
 See the license for more information.
 <https://github.com/mckenney5/qsh/raw/master/LICENSE>.
-.br
-.BR
+
+ 
+
 linenoise(3) is a copyright of Salvatore Sanfilippo et al. See their license for more information.
+
 <https://raw.githubusercontent.com/mckenney5/qsh/master/src/libs/linenoise/LICENSE>.
-.br
+
 .SH "SEE ALSO"
-.BR
-bash (1) 
-.BR
-.BR
-linenoise (3)
+.BR bash
+(1),
+.BR zsh
+(1),
+.BR linenoise
+(3)
 

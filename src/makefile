@@ -14,9 +14,13 @@ clean:
 install:
 	# Install the man page
 	gzip -k ../qsh.1
-	sudo cp ../qsh.1.gz /usr/share/man/man1/
+	sudo mv ../qsh.1.gz /usr/share/man/man1/
 	# Install the program
 	sudo cp qsh /usr/bin/.
+
+uninstall:
+	sudo rm /usr/share/man/man1/qsh.1.gz
+	sudo rm /usr/bin/qsh
 
 debug:	ui.c ui.h libs/linenoise/linenoise.c libs/linenoise/linenoise.h commands/help.h commands/c.h libs/linux.h libs/safestring.h
 	# Used if you want debugging features on

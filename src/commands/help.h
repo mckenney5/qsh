@@ -21,7 +21,7 @@
 #endif
 
 #define VERSION_STAGE "alpha"
-#define VERSION_NUM "0.0.2"
+#define VERSION_NUM "0.0.4"
 #define VERSION_STATUS "unstable"
 #define REPO "(https://github.com/mckenney5/qsh)"
 

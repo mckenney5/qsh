@@ -1,5 +1,8 @@
 /* This library is for Linux system calls */
 
+#ifndef _using_linux_h
+#define _using_linux_h
+
 /* Universal */
 #include <stdio.h>
 #include <strings.h>
@@ -17,8 +20,8 @@
 #define _MAX_DIR_NAME 210
 
 /* Global READ ONLY vars */
-const char DEFAULT_EXEC_PATH1[] = "/bin/";
-const char DEFAULT_EXEC_PATH2[] = "/usr/bin/";
+const char DEFAULT_EXEC_PATH1[] = "/usr/bin/";
+const char DEFAULT_EXEC_PATH2[] = "/bin/";
 const char DEFAULT_EXEC_PATH3[] = "/sbin";
 
 static const char HOME[] = "/home/";
@@ -66,4 +69,6 @@ void get_home(char *buf, size_t size){
 	get_user(user, 255);
 	snprintf(buf, size, "%s%s", HOME, user); //ignore this warning, truncation is fine 
 }
+
+#endif
 
