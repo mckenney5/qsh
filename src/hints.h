@@ -6,6 +6,7 @@
 #include <string.h>
 #include <strings.h>
 #include <dirent.h>
+#include <limits.h>
 #include "libs/linenoise/linenoise.h"
 #include "libs/linux.h"
 #include "ui.h"
