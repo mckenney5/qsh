@@ -33,7 +33,7 @@ The simplest way is to compile by `make`
 * `make debug`		: adds debugging symbols to the program, along with verbose output
 * `make static`		: statically links program (note: this should be done only with musl clib)
 * `make`		: makes the UI use the [linenoise-mob library](https://github.com/rain-1/linenoise-mob)
-* `make install`	: moves qsh to the /usr/bin file and installs the manpage
+* `make install`	: creats qsh with linenoise and moves qsh to the /usr/bin file and installs the manpage
 * `make uninstall`	: deletes /usr/bin/qsh and the man file from the system
 
 ##### (optional) Colors:
