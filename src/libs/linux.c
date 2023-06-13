@@ -4,8 +4,7 @@
 #define _using_linux_h
 
 /* Universal */
-#include <stdio.h>
-#include <strings.h>
+#include <iostream>
 
 /* Linux Specific */
 #include <unistd.h>	//checks if file exists
@@ -16,6 +15,8 @@
 
 
 #define _MAX_DIR_NAME 210
+
+using namespace std;
 
 /* Global READ ONLY vars */
 const char DEFAULT_EXEC_PATH1[] = "/usr/bin/";

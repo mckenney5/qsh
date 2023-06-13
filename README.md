@@ -28,8 +28,6 @@ This program allows a couple of compiling options.
 The simplest way is to compile by `make`
 
 ##### Make Options:
-* `make gnu`		: makes the user interface use [GNU readline](https://tiswww.case.edu/php/chet/readline/rltop.html)
-* `make tiny`		: makes the UI only use fgets (aka no line editing, like sh(1))
 * `make debug`		: adds debugging symbols to the program, along with verbose output
 * `make static`		: statically links program (note: this should be done only with musl clib)
 * `make`		: makes the UI use the [linenoise-mob library](https://github.com/rain-1/linenoise-mob)

@@ -1,8 +1,10 @@
 # Road Map
 List of minimum features before every release
 
-## Alpha 0.0.5 [NEXT VERSION]
+## Alpha 0.0.6 [NEXT VERSION]
 ### General
+- [ ] feature parity with C version
+- [ ] merge branches
 - [ ] set a max history size (when its hit, start overwriting from the top down)
 - [ ] update screenshot
 
@@ -28,7 +30,7 @@ List of minimum features before every release
 - [ ] add aliase options (ex DOS, bash, zsh, etc);
 - [ ] add user defined aliases
 - [ ] add simple scripting
-- [ ] add a config file
+- [ ] add a config file(?)
 
 
 ## Stable Release 1.0.0
@@ -44,11 +46,15 @@ List of minimum features before every release
 ## Wish List
 - [ ] be a competitior for bash/zsh/fish
 - [ ] make a windows version
-- [ ] POSIX compliant
+- [ ] POSIX compliant(?)
 
 
 # Completed
 List of completed items from previous releases
+
+## Alpha 0.0.5
+### General:
+- [X] ~~rewrite most features in *READABLE* C++~~
 
 ## Alpha 0.0.4
 ### General:
