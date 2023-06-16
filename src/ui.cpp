@@ -1,6 +1,6 @@
 /* -- QSH's Main File --
  * This file handles the user interface between the interpreter (interpeter.cpp) and the user
- * It is the UI's job to
+ * It is the UI's job to:
  * - not let blank strings / NULL strings pass as input (this saves boiler plate)
  * - handle interupts (Ctrl+C)
  * - take and pass command line args to interpret (NOTE: not implemented yet)
@@ -30,14 +30,19 @@ int ui(){
 	sigfillset(&mask);
 	sigprocmask(SIG_SETMASK, &mask, NULL);
 
+	char *ptr = NULL;
 
 	while(true){
 		//get input
 		string cmd = "";
-		cmd = linenoise(get_prompt().c_str());
+		ptr = linenoise(get_prompt().c_str()); //a pointer needs to be here to be free'd since linenoise uses strdup for input
+		if(ptr == NULL) return 1;
+		cmd = ptr;
 
 		if(cmd != "" && interpret(cmd) == true)
 			linenoiseHistoryAdd(cmd.c_str()); //add to history
+							  //
+		linenoiseFree(ptr); //uses free() built in to linenoise
 	}
 	return 0;
 }
